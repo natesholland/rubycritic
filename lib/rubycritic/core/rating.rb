@@ -27,6 +27,7 @@ module Rubycritic
       else
         raise "unknown GPA"
       end
+    end
 
     def to_h
       @letter
