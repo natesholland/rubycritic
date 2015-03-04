@@ -29,7 +29,7 @@ module Rubycritic
     end
 
     def lines
-      @lines ||= %x{wc -l < "#{path}"}.to_i
+      @lines ||= `wc -l < "#{path}"`.to_i
     end
 
     def complexity_per_method
