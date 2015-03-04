@@ -12,6 +12,8 @@ module Rubycritic
 
       def generate_report
         create_directories_and_files
+        abort "Failing because GPA is to low, " \
+          "should be #{Config.gpa_threshold} but is #{@gpa.round(2)}" if @gpa < Config.gpa_threshold
         puts "New JSON critique at #{report_location}"
       end
 

@@ -27,6 +27,12 @@ module Rubycritic
             @format = format
           end
 
+          opts.on(
+            "-g", "--gpa-threshold [THRESHOLD]", "Fail the build if gpa falls below threshold"
+          ) do |threshold|
+            @gpa_threshold = threshold.to_f
+          end
+
           opts.on("-m", "--mode-ci", "Use CI mode (faster, but only analyses last commit)") do
             @mode = :ci
           end
@@ -61,7 +67,8 @@ module Rubycritic
           :format => @format,
           :deduplicate_symlinks => @deduplicate_symlinks,
           :paths => paths,
-          :suppress_ratings => @suppress_ratings
+          :suppress_ratings => @suppress_ratings,
+          :gpa_threshold => @gpa_threshold
         }
       end
 
