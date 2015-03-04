@@ -58,6 +58,7 @@ module Rubycritic
         :complexity => complexity,
         :duplication => duplication,
         :methods_count => methods_count,
+        :cost => cost,
         :rating => rating
       }
     end

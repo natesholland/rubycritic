@@ -1,11 +1,10 @@
 require "json"
-require "rubycritic/generators/base"
 
 module Rubycritic
   module Generator
     module Json
 
-      class Simple < Base
+      class Simple
         def initialize(analysed_modules, gpa)
           @analysed_modules = analysed_modules
           @gpa = gpa
@@ -21,8 +20,10 @@ module Rubycritic
 
         def data
           {
-            :rubycritic => {
-              :version => Rubycritic::VERSION
+            :metadata => {
+              :rubycritic => {
+                :version => Rubycritic::VERSION
+              }
             },
             :gpa => @gpa,
             :analysed_modules => @analysed_modules

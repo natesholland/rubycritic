@@ -27,6 +27,7 @@ module Rubycritic
             @format = format
           end
 
+
           opts.on(
             "-g", "--gpa-threshold [THRESHOLD]", "Fail the build if gpa falls below threshold"
           ) do |threshold|
@@ -50,7 +51,6 @@ module Rubycritic
               @letter_threshold = nil
             end
           end
-
 
           opts.on("-m", "--mode-ci", "Use CI mode (faster, but only analyses last commit)") do
             @mode = :ci
