@@ -7,17 +7,17 @@ require "rubycritic/generators/html/code_file"
 module Rubycritic
   module Generator
 
-    class HtmlReport
+    class HtmlReport < Base
       ASSETS_DIR = File.expand_path("../html/assets", __FILE__)
 
       def initialize(analysed_modules)
         @analysed_modules = analysed_modules
+        @gpa = calculate_gpa(analysed_modules)
       end
 
       def generate_report
         create_directories_and_files
         copy_assets_to_report_directory
-        calculate_gpa
         puts "New critique at #{report_location}"
       end
 
@@ -32,21 +32,12 @@ module Rubycritic
         end
       end
 
-      def calculate_gpa
-        gpa_sum = 0
-        total = @analysed_modules.map do |analysed_module|
-          gpa_sum += analysed_module.rating.to_gpa
-        end.count
-        puts "Overal Project GPA: #{(gpa_sum / total).to_s[0..3]}"
-        gpa_sum / total
-      end
-
       def generators
         [overview_generator, code_index_generator, smells_index_generator] + file_generators
       end
 
       def overview_generator
-        @overview_generator ||= Html::Overview.new(@analysed_modules)
+        @overview_generator ||= Html::Overview.new(@analysed_modules, @gpa)
       end
 
       def code_index_generator

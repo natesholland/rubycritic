@@ -6,8 +6,9 @@ module Rubycritic
     module Json
 
       class Simple < Base
-        def initialize(analysed_modules)
+        def initialize(analysed_modules, gpa)
           @analysed_modules = analysed_modules
+          @gpa = gpa
         end
 
         def file_name
@@ -23,6 +24,7 @@ module Rubycritic
             :rubycritic => {
               :version => Rubycritic::VERSION
             },
+            :gpa => @gpa,
             :analysed_modules => @analysed_modules
           }
         end

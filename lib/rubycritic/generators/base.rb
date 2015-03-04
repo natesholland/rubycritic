@@ -24,6 +24,14 @@ module Rubycritic
         raise NotImplementedError.new("The #{self.class} class must implement the #{__method__} method.")
       end
 
+      def calculate_gpa(analysed_modules)
+        gpa_sum = 0
+        total = analysed_modules.map do |analysed_module|
+          gpa_sum += analysed_module.rating.to_gpa
+        end.count
+        gpa_sum / total
+      end
+
       private
 
       def root_directory
