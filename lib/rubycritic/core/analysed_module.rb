@@ -14,6 +14,7 @@ module Rubycritic
     attribute :complexity
     attribute :duplication,   Integer, :default => 0
     attribute :methods_count
+    attribute :lines
 
     def path
       @path ||= pathname.to_s
@@ -25,6 +26,10 @@ module Rubycritic
 
     def rating
       @rating ||= Rating.from_cost(cost)
+    end
+
+    def lines
+      @lines ||= %x{wc -l < "#{path}"}.to_i
     end
 
     def complexity_per_method
