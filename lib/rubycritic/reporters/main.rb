@@ -15,6 +15,7 @@ module Rubycritic
       def generate_report
         create_directories_and_files(generators)
         copy_assets_to_report_directory
+        calculate_gpa
         report_location
       end
 
@@ -40,6 +41,15 @@ module Rubycritic
         @analysed_modules.map do |analysed_module|
           Generator::CodeFile.new(analysed_module)
         end
+      end
+
+      def calculate_gpa
+        gpa_sum = 0
+        total = @analysed_modules.map do |analysed_module|
+          gpa_sum += analysed_module.rating.to_gpa
+        end.count
+        puts "Overal Project GPA: #{(gpa_sum / total).to_s[0..3]}"
+        gpa_sum / total
       end
 
       def report_location
