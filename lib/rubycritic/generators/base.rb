@@ -34,6 +34,14 @@ module Rubycritic
         gpa_sum / total_lines
       end
 
+      def check_letter_threshold(analysed_modules)
+        return unless Config.letter_threshold
+        analysed_modules.each do |analysed_module|
+          abort "#{analysed_module.path} fellow below the threshold " \
+          "of #{Rating.from_cost(Config.letter_threshold)}" if analysed_module.cost > Config.letter_threshold
+        end
+      end
+
       private
 
       def root_directory

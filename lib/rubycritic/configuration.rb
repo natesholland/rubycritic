@@ -2,7 +2,7 @@ module Rubycritic
   class Configuration
     attr_reader :root
     attr_accessor :source_control_system, :mode, :format, :deduplicate_symlinks,
-      :suppress_ratings, :gpa_threshold
+      :suppress_ratings, :gpa_threshold, :letter_threshold
 
     def set(options)
       self.mode = options[:mode] || :default
@@ -11,6 +11,7 @@ module Rubycritic
       self.deduplicate_symlinks = options[:deduplicate_symlinks] || false
       self.suppress_ratings = options[:suppress_ratings] || false
       self.gpa_threshold = options[:gpa_threshold] || 0.0
+      self.letter_threshold = options[:letter_threshold]
     end
 
     def root=(path)

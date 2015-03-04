@@ -19,6 +19,7 @@ module Rubycritic
         create_directories_and_files
         copy_assets_to_report_directory
         puts "New critique at #{report_location}"
+        check_letter_threshold(@analysed_modules)
         abort "Failing because GPA is to low, " \
           "should be #{Config.gpa_threshold} but is #{@gpa.round(2)}" if @gpa < Config.gpa_threshold
       end
