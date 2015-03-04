@@ -17,12 +17,26 @@ module Rubycritic
             @root = path
           end
 
+          opts.on(
+            "-f", "--format [FORMAT]",
+            [:html, :json],
+            "Report smells in the given format:",
+            "  html (default)",
+            "  json"
+          ) do |format|
+            @format = format
+          end
+
           opts.on("-m", "--mode-ci", "Use CI mode (faster, but only analyses last commit)") do
             @mode = :ci
           end
 
           opts.on("--deduplicate-symlinks", "De-duplicate symlinks based on their final target") do
             @deduplicate_symlinks = true
+          end
+
+          opts.on("--suppress-ratings", "Suppress letter ratings") do
+            @suppress_ratings = true
           end
 
           opts.on_tail("-v", "--version", "Show gem's version") do
@@ -44,8 +58,10 @@ module Rubycritic
         {
           :mode => @mode,
           :root => @root,
+          :format => @format,
           :deduplicate_symlinks => @deduplicate_symlinks,
-          :paths => paths
+          :paths => paths,
+          :suppress_ratings => @suppress_ratings
         }
       end
 
