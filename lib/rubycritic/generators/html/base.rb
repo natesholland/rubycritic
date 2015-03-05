@@ -16,9 +16,7 @@ module Rubycritic
 
         TEMPLATES_DIR = File.expand_path("../templates", __FILE__)
         LAYOUT_TEMPLATE = erb_template(File.join("layouts", "application.html.erb"))
-
         include ViewHelpers
-
 
         def file_href
           "file://#{file_pathname}"

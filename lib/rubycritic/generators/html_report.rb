@@ -53,7 +53,6 @@ module Rubycritic
         end
       end
 
-
       def generators
         [overview_generator, code_index_generator, smells_index_generator] + file_generators
       end

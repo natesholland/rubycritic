@@ -27,7 +27,6 @@ module Rubycritic
             @format = format
           end
 
-
           opts.on(
             "-g", "--gpa-threshold [THRESHOLD]", "Fail the build if gpa falls below threshold"
           ) do |threshold|
@@ -37,19 +36,7 @@ module Rubycritic
           opts.on(
             "-l", "--letter-threshold [THRESHOLD]", "Fail the build if a single class falls below the threshold"
           ) do |threshold|
-            if threshold == "F"
-              @letter_threshold = 16
-            elsif threshold == "D"
-              @letter_threshold = 8
-            elsif threshold == "C"
-              @letter_threshold = 4
-            elsif threshold == "B"
-              @letter_threshold = 2
-            elsif threshold == "A"
-              @letter_threshold = 0
-            else
-              @letter_threshold = nil
-            end
+            @letter_threshold = letter_to_cost(threshold)
           end
 
           opts.on("-m", "--mode-ci", "Use CI mode (faster, but only analyses last commit)") do
@@ -99,6 +86,20 @@ module Rubycritic
           ["."]
         else
           @argv
+        end
+      end
+
+      def letter_to_cost(letter)
+        if letter == "F"
+          16
+        elsif letter == "D"
+          8
+        elsif letter == "C"
+          4
+        elsif letter == "B"
+          2
+        elsif letter == "A"
+          0
         end
       end
     end
