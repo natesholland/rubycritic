@@ -30,6 +30,14 @@ module Rubycritic
     def relative_path(file)
       (root_directory + file).relative_path_from(file_directory)
     end
+
+    def file_directory
+      raise NotImplementedError.new("The #{self.class} class must implement the #{__method__} method.")
+    end
+
+    def root_directory
+      raise NotImplementedError.new("The #{self.class} class must implement the #{__method__} method.")
+    end
   end
 
 end
