@@ -29,7 +29,13 @@ module Rubycritic
     end
 
     def lines
-      @lines ||= `wc -l < "#{path}"`.to_i
+      output = `wc -l < "#{path}"`.to_i
+      result = $?.success?
+      if result
+        @lines ||= output
+      else
+        @lines ||= File.open(path).lines.count
+      end
     end
 
     def complexity_per_method
