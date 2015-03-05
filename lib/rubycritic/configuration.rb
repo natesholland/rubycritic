@@ -6,7 +6,7 @@ module Rubycritic
 
     def set(options)
       self.mode = options.fetch(:mode) { :default }
-      self.root = options.fetch(:root) { "tmp/rubycritic" }
+      self.root = options[:root] || "tmp/rubycritic"
       self.format = options.fetch(:format) { :html }
       self.deduplicate_symlinks = options.fetch(:deduplicate_symlinks) { false }
       self.suppress_ratings = options.fetch(:suppress_ratings) { false }
