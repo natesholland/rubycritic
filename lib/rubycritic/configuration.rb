@@ -5,12 +5,12 @@ module Rubycritic
       :suppress_ratings, :gpa_threshold, :letter_threshold
 
     def set(options)
-      self.mode = options[:mode] || :default
-      self.root = options[:root] || "tmp/rubycritic"
-      self.format = options[:format] || :html
-      self.deduplicate_symlinks = options[:deduplicate_symlinks] || false
-      self.suppress_ratings = options[:suppress_ratings] || false
-      self.gpa_threshold = options[:gpa_threshold] || 0.0
+      self.mode = options.fetch(:mode) { :default }
+      self.root = options.fetch(:root) { "tmp/rubycritic" }
+      self.format = options.fetch(:format) { :html }
+      self.deduplicate_symlinks = options.fetch(:deduplicate_symlinks) { false }
+      self.suppress_ratings = options.fetch(:suppress_ratings) { false }
+      self.gpa_threshold = options.fetch(:gpa_threshold) { 0.0 }
       self.letter_threshold = options[:letter_threshold]
     end
 
