@@ -12,6 +12,13 @@ module Rubycritic
         @gpa = calculate_gpa(analysed_modules)
       end
 
+      def generate_report
+        print generator.render
+        check_letter_threshold(@analysed_modules)
+        abort "Failing because GPA is to low, " \
+          "should be #{Config.gpa_threshold} but is #{@gpa.round(2)}" if @gpa < Config.gpa_threshold
+      end
+
       private
 
       def generator
