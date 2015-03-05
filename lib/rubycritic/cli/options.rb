@@ -9,6 +9,7 @@ module Rubycritic
       end
 
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/AbcSize
       def parse
         @parser.new do |opts|
           opts.banner = "Usage: rubycritic [options] [paths]"
