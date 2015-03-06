@@ -29,6 +29,7 @@ module Rubycritic
     end
 
     def lines
+      return @lines if @lines
       output = `wc -l < "#{path}"`.to_i
       result = $?.success?
       if result
