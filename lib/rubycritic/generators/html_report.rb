@@ -23,7 +23,8 @@ module Rubycritic
         puts "New critique at #{report_location}"
         check_letter_threshold(@analysed_modules)
         abort "Failing because GPA is to low, " \
-          "should be #{Config.gpa_threshold} but is #{@gpa.round(2)}" if @gpa < Config.gpa_threshold
+          "should be #{Config.gpa_threshold} but is #{@gpa.round(2)}" if
+          Config.gpa_threshold && @gpa < Config.gpa_threshold
       end
 
       private

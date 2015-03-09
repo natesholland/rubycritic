@@ -10,6 +10,20 @@ module Rubycritic
       end
     end
 
+    def self.letter_to_cost(letter)
+      if letter == "F"
+        16
+      elsif letter == "D"
+        8
+      elsif letter == "C"
+        4
+      elsif letter == "B"
+        2
+      elsif letter == "A"
+        0
+      end
+    end
+
     def initialize(letter)
       @letter = letter
     end

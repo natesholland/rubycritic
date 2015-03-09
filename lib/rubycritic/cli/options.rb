@@ -1,4 +1,5 @@
 require "optparse"
+require 'rubycritic/core/rating'
 
 module Rubycritic
   module Cli
@@ -37,7 +38,7 @@ module Rubycritic
           opts.on(
             "-l", "--letter-threshold [THRESHOLD]", "Fail the build if a single class falls below the threshold"
           ) do |threshold|
-            @letter_threshold = letter_to_cost(threshold)
+            @letter_threshold = Rating.letter_to_cost(threshold)
           end
 
           opts.on("-m", "--mode-ci", "Use CI mode (faster, but only analyses last commit)") do
@@ -87,20 +88,6 @@ module Rubycritic
           ["."]
         else
           @argv
-        end
-      end
-
-      def letter_to_cost(letter)
-        if letter == "F"
-          16
-        elsif letter == "D"
-          8
-        elsif letter == "C"
-          4
-        elsif letter == "B"
-          2
-        elsif letter == "A"
-          0
         end
       end
     end
