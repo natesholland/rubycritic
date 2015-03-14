@@ -1,5 +1,5 @@
 require "optparse"
-require 'rubycritic/core/rating'
+require "rubycritic/core/rating"
 
 module Rubycritic
   module Cli
